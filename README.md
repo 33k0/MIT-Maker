@@ -1,4 +1,4 @@
-# Maker Portfolio — Systems, Failure, and Publication Infrastructure
+# Maker Portfolio—Systems, Failure, and Publication Infrastructure
 
 This repository is a **maker portfolio proxy** containing inspectable artifacts from two independent systems I built:
 
@@ -10,7 +10,7 @@ It exposes the **control logic, invariants, and design decisions** behind each s
 
 ---
 
-## Project 1: PALADIN — Error-Resilient Tool-Using Agents
+## Project 1: PALADIN—Error-Resilient Tool-Using Agents
 
 PALADIN is a research framework for evaluating how language-model agents recover from execution-time tool failures.
 
@@ -56,7 +56,7 @@ Accepted for presentation at the AAAI 2026 conference (Oral).
 
 ---
 
-## Project 2: FTR — Youth Advocacy News Platform
+## Project 2: FTR—Youth Advocacy News Platform
 
 FTR is a **youth-led advocacy news site** where multiple editors collaborate on image-heavy articles addressing social and civic issues.
 
