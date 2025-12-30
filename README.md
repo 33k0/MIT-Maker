@@ -1,83 +1,107 @@
-# PALADIN — Maker Portfolio Proxy
+# Maker Portfolio — Systems, Failure, and Publication Infrastructure
 
-This repository contains a **deterministic, offline proxy** of the PALADIN recovery framework used in my research on error-resilient tool-using agents.
+This repository is a **maker portfolio proxy** containing inspectable artifacts from two independent systems I built:
 
-The purpose of this codebase is to make the **core control flow and recovery logic inspectable** without requiring model access, large-scale compute, or licensed datasets.
+1. **PALADIN** — a research framework for error-resilient tool-using AI agents  
+2. **FTR** — a youth advocacy news site with a focus on the backend and creation platform.
 
----
-
-## What this repository shows
-
-The included files preserve the **structural invariants** of the full PALADIN system:
-
-- multi-step agent → tool interaction
-- explicit failure detection
-- branching recovery logic
-- reuse of prior recovery patterns
-- termination conditions and completion criteria
-
-These components represent the **architectural decisions** behind the system rather than the infrastructure used to run large-scale experiments.
+The purpose of this repository is **inspection, not execution parity**.  
+It exposes the **control logic, invariants, and design decisions** behind each system without requiring large-scale compute or production infrastructure.
 
 ---
 
-## What is omitted (by design)
+## Project 1: PALADIN — Error-Resilient Tool-Using Agents
 
-The following components from the full research system are **not included** in this repository:
+PALADIN is a research framework for evaluating how language-model agents recover from runtime errors which are commonly faced within tooluse.
 
-- trained or fine-tuned language models  
-- licensed datasets (e.g., ToolBench variants)  
-- large-scale evaluation infrastructure  
-- internal data-generation pipelines  
+Most benchmarks collapse failure and recovery into a single outcome. PALADIN instead treats execution-time failure as a **first-class learning and evaluation signal** and then teaches models to recover from such failures.
 
-These elements are omitted due to **ongoing review and dataset licensing constraints**.  
-The annotation logic exposed here mirrors the rules used by the full system, and the accompanying Maker Portfolio media includes **real traces and outputs** from the complete implementation.
+### What the PALADIN artifacts demonstrate
+
+The `Paladin Demos/` directory contains **offline, deterministic proxies** of the PALADIN framework that make the system’s structure inspectable:
+
+- Explicit detection of execution-time tool failures  
+- Data annotation to highlight recovery as a core signal not implicit reasoning  
+- Reuse of recovery trajectories instead of brute-force retries  
+
+These files preserve the **structural invariants** of the full system:
+failure → diagnosis → strategy shift → continuation or termination.
+
+### What is intentionally omitted
+
+By design, this repository does **not** include:
+
+- Trained or fine-tuned language models  
+- Full production code (Cannot release due to ongoing research use)
+- Large-scale evaluation infrastructure  
+- Internal data-generation pipelines  
+
+The code shown here mirrors the rules used in the full research system, but is stripped down to make **control flow and recovery logic legible**.
+
+### PALADIN dataset
+
+The failure–recovery dataset generated using this framework is publicly available here:
+
+https://huggingface.co/datasets/E-k-O/PaladinDataSet
+
+### Related publication
+
+Vuddanti, Shah, et al.  
+**PALADIN: Self-Correcting Language Model Agents to Cure Tool-Failure Cases**  
+
+To appear in the Proceedings of the AAAI Conference on Artificial Intelligence (AAAI), 2026  
+(Oral presentation)
+
+arXiv: https://arxiv.org/abs/2509.25238
 
 ---
 
-## File overview
+## Project 2: FTR — Youth Advocacy News Platform
 
-### Core simulation
+FTR is a **youth-led advocacy news site** where multiple editors collaborate on image-heavy articles addressing social and civic issues.
 
-- `simulation_paladin.py`  
-  Demonstrates how unseen tool errors are mapped to known failure categories and how previously defined recovery trajectories are reused to complete the task.
+The core engineering challenge was not visual polish, but adjusting to observed failures in collaborative publishing workflows to appeal to both authors and readers.
 
-### Annotation primitives
+### What the FTR artifacts demonstrate
 
-- `annotate_clean.py`  
-  Defines invariants and normalization rules for valid, non-error agent trajectories.
+The FTR code excerpts included here show:
 
-- `annotate_recovery.py`  
-  Defines structured recovery generation conditioned on detected failure types.
+- A **publication-aware article editor** where authors write directly in the layout readers see  
+- Context-aware formatting controls that disappear when not needed  
+- Inline image handling with **durable, publish-safe storage guarantees**  
+- A backend architecture that shifts **authority from application code to the database**  
+- Declarative enforcement of permissions and invariants (via Supabase Row Level Security)  
 
-These files expose the **core annotation and recovery rules** in isolation for clarity.
+The system was shaped by real failures encountered during collaboration, including broken media persistence, fragile permissions, and correctness depending on developer discipline rather than system guarantees.
+
+### Full FTR codebase
+
+This repository contains only representative artifacts intended to show architectural decisions.
+
+The **complete FTR website**, including frontend, backend, schema, and deployment logic, is available here:
+
+https://github.com/BasicHooman/website-ftr
 
 ---
 
-## Note on dataset construction
+## Repository Structure
 
-The failure–recovery datasets used in the PALADIN paper were generated using a larger internal pipeline that injects failures into real tool-using trajectories and applies the annotation logic shown here at scale.
-
-That internal pipeline is not included in this repository. The code provided here represents a **faithful abstraction** of the underlying rules and decision points rather than a full reproduction of the research environment.
-
+```
+├── FTR Code/
+│ └── Representative frontend and backend excerpts
+├── Paladin Demos/
+│ ├── annotate_clean.py
+│ ├── annotate_recovery.py
+│ └── simulation_with_paladin_error_match.py
+├── README.md
+└── LICENSE
+```
 ---
 
 ## How to read this repository
 
 If you are skimming:
 
-1. Start with `simulation.py` to see the overall control flow  
-2. Then read `simulation_with_paladin_error_match.py` to see recovery under unseen failures  
-3. Skim the annotation files to understand how success and recovery are formalized  
-
-This repository is intended for **inspection and understanding**, not execution parity.
-
-## Related publication
-
-This work is described in more detail in:
-
-Vuddanti, Shah, et al. *PALADIN: Self-Correcting Language Model Agents to Cure Tool-Failure Cases*. 
-
-arXiv preprint: https://arxiv.org/abs/2509.25238
-
-To appear in the Proceedings of the AAAI Conference on Artificial Intelligence (AAAI), 2026.  
-(Oral presentation)
+1. Start with `simulation_with_paladin_error_match.py` to see PALADIN’s end-to-end control flow  
+2. Read `annotate_recovery.py` to understand how recovery behavior is formalized  
+3. Skim the FTR excerpts to see how correctness and invariants are enforced in a real publishing system  
