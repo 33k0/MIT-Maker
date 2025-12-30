@@ -12,7 +12,7 @@ It exposes the **control logic, invariants, and design decisions** behind each s
 
 ## Project 1: PALADIN — Error-Resilient Tool-Using Agents
 
-PALADIN is a research framework for evaluating how language-model agents recover from runtime errors which are commonly faced within tooluse.
+PALADIN is a research framework for evaluating how language-model agents recover from execution-time tool failures.
 
 Most benchmarks collapse failure and recovery into a single outcome. PALADIN instead treats execution-time failure as a **first-class learning and evaluation signal** and then teaches models to recover from such failures.
 
@@ -24,7 +24,8 @@ The `Paladin Demos/` directory contains **offline, deterministic proxies** of th
 - Data annotation to highlight recovery as a core signal not implicit reasoning  
 - Reuse of recovery trajectories instead of brute-force retries  
 
-These files preserve the **structural invariants** of the full system:
+These files preserve the **decision structure** of the full system:
+
 failure → diagnosis → strategy shift → continuation or termination.
 
 ### What is intentionally omitted
@@ -32,7 +33,7 @@ failure → diagnosis → strategy shift → continuation or termination.
 By design, this repository does **not** include:
 
 - Trained or fine-tuned language models  
-- Full production code (Cannot release due to ongoing research use)
+- Full production code (withheld due to ongoing research use)
 - Large-scale evaluation infrastructure  
 - Internal data-generation pipelines  
 
@@ -49,10 +50,9 @@ https://huggingface.co/datasets/E-k-O/PaladinDataSet
 Vuddanti, Shah, et al.  
 **PALADIN: Self-Correcting Language Model Agents to Cure Tool-Failure Cases**  
 
-To appear in the Proceedings of the AAAI Conference on Artificial Intelligence (AAAI), 2026  
-(Oral presentation)
-
 arXiv: https://arxiv.org/abs/2509.25238
+
+Accepted for presentation at the AAAI 2026 conference (Oral).
 
 ---
 
