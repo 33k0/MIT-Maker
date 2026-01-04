@@ -1,3 +1,5 @@
+#This file shows how the errors are mapped for the unknown error->known error based on the findings from a seperate paper (Toolscan).
+
 {
   "Tool Hallucination": {
     "_description": "tool not found errors",
@@ -92,4 +94,5 @@
       "BrokenPipeError"
     ]
   }
+
 }
